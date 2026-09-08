@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Patient Health Monitoring System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     LOGIN PAGE
+====================================================== -->
+
+<div id="loginPage" class="page">
+
+    <div class="login-container">
+
+        <div class="logo">
+            ❤️
+        </div>
+
+        <h1>Patient Health Monitoring</h1>
+
+        <p class="subtitle">
+            Login to your health dashboard
+        </p>
+
+
+        <form id="loginForm">
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-btn">
+
+                Login
+
+            </button>
+
+        </form>
+
+
+        <p
+            id="loginMessage"
+            class="message">
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ======================================================
+     DASHBOARD
+====================================================== -->
+
+<div id="dashboardPage"
+     class="page hidden">
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="brand">
+
+            ❤️ Patient Health Monitor
+
+        </div>
+
+
+        <button
+            id="logoutBtn"
+            class="logout-btn">
+
+            Logout
+
+        </button>
+
+    </header>
+
+
+
+    <main class="dashboard">
+
+
+        <!-- ==================================================
+             WELCOME
+        ================================================== -->
+
+        <section class="welcome-card">
+
+            <div>
+
+                <h2>
+
+                    Welcome,
+
+                    <span id="patientName">
+                        Patient
+                    </span>
+
+                    👋
+
+                </h2>
+
+                <p>
+
+                    Monitor your health information
+                    and vital signs.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             PATIENT INFORMATION
+        ================================================== -->
+
+        <section>
+
+            <h2 class="section-title">
+
+                Patient Information
+
+            </h2>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-card">
+
+                    <span>Name</span>
+
+                    <strong id="infoName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>Age</span>
+
+                    <strong id="infoAge">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>Gender</span>
+
+                    <strong id="infoGender">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>Email</span>
+
+                    <strong id="infoEmail">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>Phone</span>
+
+                    <strong id="infoPhone">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             RECORD NEW HEALTH INFORMATION
+        ================================================== -->
+
+        <section class="record-section">
+
+            <h2 class="section-title">
+
+                Record New Health Information
+
+            </h2>
+
+
+            <div class="record-card">
+
+
+                <form id="vitalForm">
+
+
+                    <!-- BLOOD PRESSURE -->
+
+                    <div class="input-group">
+
+                        <label for="newBloodPressure">
+
+                            Blood Pressure
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newBloodPressure"
+                            placeholder="Example: 120/80"
+                            required
+                        >
+
+                        <small>
+
+                            Enter systolic/diastolic
+                            pressure
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- HEART RATE -->
+
+                    <div class="input-group">
+
+                        <label for="newHeartRate">
+
+                            Heart Rate
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="newHeartRate"
+                            placeholder="Example: 78"
+                            min="1"
+                            max="250"
+                            step="1"
+                            required
+                        >
+
+                        <small>
+
+                            Beats per minute (BPM)
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- OXYGEN -->
+
+                    <div class="input-group">
+
+                        <label for="newOxygen">
+
+                            Oxygen Level
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="newOxygen"
+                            placeholder="Example: 98"
+                            min="1"
+                            max="100"
+                            step="0.1"
+                            required
+                        >
+
+                        <small>
+
+                            SpO₂ percentage
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- TEMPERATURE -->
+
+                    <div class="input-group">
+
+                        <label for="newTemperature">
+
+                            Temperature
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="newTemperature"
+                            placeholder="Example: 36.7"
+                            min="20"
+                            max="50"
+                            step="0.1"
+                            required
+                        >
+
+                        <small>
+
+                            Temperature in °C
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- ==================================================
+                         GLUCOSE
+                    ================================================== -->
+
+                    <div class="input-group">
+
+                        <label for="newGlucose">
+
+                            Glucose Level
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="newGlucose"
+                            placeholder="Example: 100"
+                            min="1"
+                            max="600"
+                            step="0.1"
+                        >
+
+                        <small>
+
+                            Blood glucose level (mg/dL)
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- ==================================================
+                         THYROID
+                    ================================================== -->
+
+                    <div class="input-group">
+
+                        <label for="newThyroid">
+
+                            Thyroid (TSH)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="newThyroid"
+                            placeholder="Example: 2.5"
+                            min="0"
+                            max="100"
+                            step="0.01"
+                        >
+
+                        <small>
+
+                            TSH level (mIU/L)
+
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- SAVE -->
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+
+                        💾 Save Health Record
+
+                    </button>
+
+
+                </form>
+
+
+                <p
+                    id="vitalMessage"
+                    class="message">
+                </p>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             LATEST HEALTH INFORMATION
+        ================================================== -->
+
+        <section>
+
+
+            <div class="section-heading">
+
+
+                <h2 class="section-title">
+
+                    Latest Health Information
+
+                </h2>
+
+
+                <button
+                    class="refresh-btn"
+                    onclick="loadVitals()">
+
+                    🔄 Refresh
+
+                </button>
+
+
+            </div>
+
+
+
+            <div class="vitals-grid">
+
+
+                <!-- BLOOD PRESSURE -->
+
+                <div class="vital-card">
+
+                    <div class="vital-icon">
+
+                        🩸
+
+                    </div>
+
+                    <h3>
+
+                        Blood Pressure
+
+                    </h3>
+
+                    <div
+                        id="bloodPressure"
+                        class="vital-value">
+
+                        --
+
+                    </div>
+
+                    <p>
+
+                        mmHg
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- HEART RATE -->
+
+                <div class="vital-card">
+
+                    <div class="vital-icon">
+
+                        ❤️
+
+                    </div>
+
+                    <h3>
+
+                        Heart Rate
+
+                    </h3>
+
+                    <div
+                        id="heartRate"
+                        class="vital-value">
+
+                        --
+
+                    </div>
+
+                    <p>
+
+                        BPM
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- OXYGEN -->
+
+                <div class="vital-card">
+
+                    <div class="vital-icon">
+
+                        🫁
+
+                    </div>
+
+                    <h3>
+
+                        Oxygen Level
+
+                    </h3>
+
+                    <div
+                        id="oxygenLevel"
+                        class="vital-value">
+
+                        --
+
+                    </div>
+
+                    <p>
+
+                        % SpO₂
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- TEMPERATURE -->
+
+                <div class="vital-card">
+
+                    <div class="vital-icon">
+
+                        🌡️
+
+                    </div>
+
+                    <h3>
+
+                        Temperature
+
+                    </h3>
+
+                    <div
+                        id="temperature"
+                        class="vital-value">
+
+                        --
+
+                    </div>
+
+                    <p>
+
+                        °C
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     GLUCOSE
+                ================================================== -->
+
+                <div class="vital-card">
+
+                    <div class="vital-icon">
+
+                        🩸
+
+                    </div>
+
+                    <h3>
+
+                        Glucose
+
+                    </h3>
+
+                    <div
+                        id="glucose"
+                        class="vital-value">
+
+                        --
+
+                    </div>
+
+                    <p>
+
+                        mg/dL
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     THYROID
+                ================================================== -->
+
+                <div class="vital-card">
+
+                    <div class="vital-icon">
+
+                        🦋
+
+                    </div>
+
+                    <h3>
+
+                        Thyroid (TSH)
+
+                    </h3>
+
+                    <div
+                        id="thyroid"
+                        class="vital-value">
+
+                        --
+
+                    </div>
+
+                    <p>
+
+                        mIU/L
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             HEALTH STATUS
+        ================================================== -->
+
+        <section class="status-section">
+
+            <h2 class="section-title">
+
+                Health Status
+
+            </h2>
+
+
+            <div
+                id="healthStatus"
+                class="health-status normal">
+
+                🟢 Waiting for vital information...
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             HEALTH RECORD HISTORY
+        ================================================== -->
+
+        <section>
+
+            <h2 class="section-title">
+
+                Previous Health Records
+
+            </h2>
+
+
+            <div class="table-container">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+
+                                Date & Time
+
+                            </th>
+
+                            <th>
+
+                                Blood Pressure
+
+                            </th>
+
+                            <th>
+
+                                Heart Rate
+
+                            </th>
+
+                            <th>
+
+                                Oxygen
+
+                            </th>
+
+                            <th>
+
+                                Temperature
+
+                            </th>
+
+                            <th>
+
+                                Glucose
+
+                            </th>
+
+                            <th>
+
+                                Thyroid (TSH)
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="vitalsTableBody">
+
+                        <tr>
+
+                            <td colspan="7">
+
+                                No health records available
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+
+</body>
+
+</html>
